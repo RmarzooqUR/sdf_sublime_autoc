@@ -1,0 +1,18 @@
+{
+   "scope": "text.xml - source - meta.tag, punctuation.definition.tag.begin",
+
+   "completions":
+   [
+      { "trigger": "sdf", "contents": "<sdf version='${1:1.6}'>\n\t$2 \n</sdf>$0"},
+      { "trigger": "world", "contents": "<world name='${1:default}'>\n<!--Common tags- model,physics,light,scene,audio,wind,include,gravity,magnetic_feild,atmosphere,gui,actor,plugin,road,spherical_coordinates,state,population-->\n\t$2\n</world>"},
+      { "trigger": "physics", "contents": "<physics type='${1:ode}'>$2</physics>"},
+      { "trigger": "scene", "contents": "<scene>\n\t$1\n</scene>"},
+      { "trigger": "light", "contents": "<light type='${1:point}' name='${2:point_light}'>\n\t<pose>${3:0 2 2 0 0 0}</pose>\n\t<diffuse>${4:1 0 0 1}</diffuse>\n\t<specular>${5:.1 .1 .1 1}</specular>\n\t<attenuation>\n\t\t<range>${6:20}</range>\n\t\t<linear>${7:0.2}</linear>\n\t\t<constant>${8:0.8}</constant>\n\t\t<quadratic>${9:0.01}</quadratic>\n\t</attenuation>\n\t<cast_shadows>${10:false}</cast_shadows>\n</light>"},
+      { "trigger": "gravity", "contents": "<gravity>${1:0 0 -9.8}</gravity>"},
+      { "trigger": "magnetic_feild", "contents": "<magnetic_feild>${1:6e-06 2.3e-05 -4.2e-05}</magnetic_feild>"},
+      { "trigger": "audio", "contents": "<audio>\n\t<device>${1:default}</device>\n</audio>"},
+      { "trigger": "wind", "contents": "<wind>\n\t<linear_velocity>${1:0 0 0}</linear_velocity>\n</wind>"},
+      { "trigger": "include", "contents": "<include>\n\t<uri>${1:_default_}</uri>\n\t<name>$2</name>\n\t<static>${3:0}</static>\n\t<pose>\n\t\t${4:0 0 0 0 -0 0}\n\t\t<frame>$5</frame>\n\t</pose>\n</include>"},
+      
+   ]
+}
