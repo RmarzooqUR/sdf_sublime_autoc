@@ -4,7 +4,7 @@
    "completions":
    [
       { "trigger": "sdf", "contents": "<sdf version='${1:1.6}'>\n\t$2 \n</sdf>$0"},
-      { "trigger": "world", "contents": "<world name='${1:default}'>\n<!--Common tags- model,physics,light,scene,audio,wind,include,gravity,magnetic_feild,atmosphere,gui,actor,plugin,road,spherical_coordinates,state,population-->\n\t$2\n</world>"},
+      { "trigger": "world", "contents": "<world name='${1:default}'>\n<!--Common tags- model,physics,light,scene,audio,wind,include,gravity,magnetic_feild,actor,plugin-->\n\t$2\n</world>"},
       { "trigger": "physics", "contents": "<physics type='${1:ode}'>$2</physics>"},
       { "trigger": "scene", "contents": "<scene>\n\t$1\n</scene>"},
       { "trigger": "light", "contents": "<light type='${1:point}' name='${2:point_light}'>\n\t<pose>${3:0 2 2 0 0 0}</pose>\n\t<diffuse>${4:1 0 0 1}</diffuse>\n\t<specular>${5:.1 .1 .1 1}</specular>\n\t<attenuation>\n\t\t<range>${6:20}</range>\n\t\t<linear>${7:0.2}</linear>\n\t\t<constant>${8:0.8}</constant>\n\t\t<quadratic>${9:0.01}</quadratic>\n\t</attenuation>\n\t<cast_shadows>${10:false}</cast_shadows>\n</light>"},
@@ -13,6 +13,24 @@
       { "trigger": "audio", "contents": "<audio>\n\t<device>${1:default}</device>\n</audio>"},
       { "trigger": "wind", "contents": "<wind>\n\t<linear_velocity>${1:0 0 0}</linear_velocity>\n</wind>"},
       { "trigger": "include", "contents": "<include>\n\t<uri>${1:_default_}</uri>\n\t<name>$2</name>\n\t<static>${3:0}</static>\n\t<pose>\n\t\t${4:0 0 0 0 -0 0}\n\t\t<frame>$5</frame>\n\t</pose>\n</include>"},
-      
+      { "trigger": "model", "contents": "<model name='${1:my_model}'>\n<!--Common tags- model,link,include,pose,joint,plugin-->\n\t$2\n</model>"},
+      { "trigger": "pose", "contents": "<pose frame='$1'>${2:0 0 0 0 -0 0}</pose>"},
+      { "trigger": "plugin", "contents": "<plugin name='${1:_default_}' filename='${2:_default_}'>\n\t<!--Any other required elements-->\n\t$3\n</plugin>"},
+      { "trigger": "frame", "contents": "<frame name='${1:frame_name}'>\n\t<!--May contain a pose element-->$2\n</frame>"},
+      { "trigger": "inertial", "contents": "<inertial>\n\t<mass>${1:1}</mass>\n\t<inertia>\n\t\t<ixx>${2:1}</ixx>\n\t\t<ixy>${3:0}</ixy>\n\t\t<ixz>${4:0}</ixz>\n\t\t<iyy>${5:1}</iyy>\n\t\t<iyz>${6:0}</iyz>\n\t\t<izz>${7:1}</izz>\n\t</insertia>\n\t<!--May contain a frame element-->$8\n</inertial>"},
+      { "trigger": "link", "contents": "<link name='${1:_default_}'>\n\t<!--May contain pose,frame,collision, visual, sensor, inertial elements-->$2\n</link>"},
+      { "trigger": "collision", "contents": "<collision name='${1:_default_}'>\n\t<!--May contain frame, pose, surface elements-->\n\t<!--geometry is a required element-->$2\n</collision>"},
+      { "trigger": "visual", "contents": "<visual name='${1:_default_}'>\n\t<!--May contain frame, pose, meta, material, plugin,transparency, laser_retro, cast_shadows elements-->\n\t<!--geometry is a required element-->$2\n</visual>"},
+      { "trigger": "geometry", "contents": "<geometry>\n\t<!--geometry may be box,cylinder, heightmap, image,plane, polyline, sphere or empty-->\n\t<mesh>\n\t\t<!--May contain submesh element-->\n\t\t<uri>$1</uri>\n\t\t<scale>${2:1 1 1}</scale>\n\t</mesh>\n</geometry>"},
+      { "trigger": "sensor", "contents": "<sensor name='${1:my_sensor}' type='${2:_default_}'>\n\t<!--May contain frame,pose,plugin elements-->\n\t<!--Property tags(of sensor) always_on,update_rate, visualize, topic-->\n\t<!--sensors- altimeter,camera,contact,gps,imu,logical_camera,magnetometer,ray,rfidtag,rfid,sonar,transciever,force_torque-->$3\n</sensor>"},
+      { "trigger": "sonar", "contents": "<sonar>\n\t<min>${1:0}</min>\n\t<max>${2:1}</max>\n\t<radius>${3:0.5}</radius>\n</sonar>"},
+      { "trigger": "imu", "contents": "<imu>\n\t<topic>${1:_default_topic_}</topic>\n\t<angular_velocity>\n\t\t<x>\n\t\t\t<!--Must contain a noise tag-->$2\n\t\t</x>\n\t\t<y>\n\t\t\t<!--Must contain a noise tag-->$3\n\t\t</y>\n\t\t<z>\n\t\t\t<!--Must contain a noise tag-->$4\n\t\t</z>\n\t</angular_velocity>\n\t<linear_acceleration>\n\t\t<x>\n\t\t\t<!--Must contain a noise tag-->$5\n\t\t</x>\n\t\t<y>\n\t\t\t<!--Must contain a noise tag-->$6\n\t\t</y>\n\t\t<z>\n\t\t\t<!--Must contain a noise tag-->$7\n\t\t</z>\n\t</linear_acceleration>\n</imu>"},
+      { "trigger": "noise", "contents": "<noise type='${1:none}'>\n\t<mean>${2:0}</mean>\n\t<stddev>${3:0}</stddev>\n\t<bias_mean>${4:0}</bias_mean>\n\t<bias_stddev>${5:0}</bias_stddev>\n\t<precision>${6:0}</precision>\n</noise>"},
+      { "trigger": "camera", "contents": "<camera name='${1:_default_}'>\n\t<horizontal_fov>${2:1.047}</horizontal_fov>\n\t<image>\n\t\t<width>${3:320}</width>\n\t\t<height>${4:240}</height>\n\t\t<format>${5:R8G8B8}</format>\n\t</image>\n\t<clip>\n\t\t<near>${6:0.1}</near>\n\t\t<far>${7:100}</far>\n\t</clip>\n\t<!--May contain frame,pose,save,depth_camera,distortion,lens,noise tags-->$8\n</camera>"},
+      { "trigger": "depth_camera", "contents": "<depth_camera>\n\t<output>${1:depths}</output>\n</depth_camera>"},
+      { "trigger": "update_rate", "contents": "<update_rate>${1:0}</update_rate>"},
+      { "trigger": "visualize", "contents": "<visualize>${1:0}</visualize>"},
+      { "trigger": "always_on", "contents": "<always_on>${1:0}</always_on>"},
+      { "trigger": "gps", "contents": "<gps>\n\t<position_sensing>\n\t\t<horizontal>\n\t\t\t<!--Must contain a noise element-->$1\n\t\t</horizontal>\n\t\t<vertical>\n\t\t\t<!--Must contain a noise element-->$2\n\t\t</vertical>\n\t</position_sensing>\n\t<velocity_sensing>\n\t\t<horizontal>\n\t\t\t<!--Must contain a noise element-->$3\n\t\t</horizontal>\n\t\t<vertical>\n\t\t\t<!--Must contain a noise element-->$4\n\t\t</vertical>\n\t</velocity_sensing>\n</gps>"},
    ]
 }
