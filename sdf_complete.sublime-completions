@@ -32,5 +32,6 @@
       { "trigger": "visualize", "contents": "<visualize>${1:0}</visualize>"},
       { "trigger": "always_on", "contents": "<always_on>${1:0}</always_on>"},
       { "trigger": "gps", "contents": "<gps>\n\t<position_sensing>\n\t\t<horizontal>\n\t\t\t<!--Must contain a noise element-->$1\n\t\t</horizontal>\n\t\t<vertical>\n\t\t\t<!--Must contain a noise element-->$2\n\t\t</vertical>\n\t</position_sensing>\n\t<velocity_sensing>\n\t\t<horizontal>\n\t\t\t<!--Must contain a noise element-->$3\n\t\t</horizontal>\n\t\t<vertical>\n\t\t\t<!--Must contain a noise element-->$4\n\t\t</vertical>\n\t</velocity_sensing>\n</gps>"},
+      { "trigger": "joint", "contents": "<joint name='${1:_default_}' type='${2:_default_}'>\n\t<!--May contain frame, pose,sensor,physics etc-->\n\t<!--May contain axis2 for 2nd axis of revolute2 joints-->\n\t<parent>${3:parent_link_name}</parent>\n\t<child>${4:child_link_name}</child>\n\t<axis>\n\t\t<!--May contain dynamics tag-->\n\t\t<initial_position>${5:0}</initial_position>\n\t\t<xyz>${6:0 0 1}</xyz>\n\t\t<limit>\n\t\t\t<lower>${7:-1e+16}</lower>\n\t\t\t<upper>${8:1e+16}</upper>\n\t\t\t<effort>${9:-1}</effort>\n\t\t\t<velocity>${10:-1}</velocity>\n\t\t\t<stiffness>${11:1e+08}</stiffness>\n\t\t\t<dissipation>${12:1}</dissipation>\n\t\t</limit>\n\t</axis>\n</joint>"},
    ]
 }
